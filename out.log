@@ -1,0 +1,8 @@
+$ next start
+   ▲ Next.js 15.3.0
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.39.138:3000
+
+ ✓ Starting...
+ ✓ Ready in 168ms
+error: script "start" was terminated by signal SIGHUP (Terminal hung up)
