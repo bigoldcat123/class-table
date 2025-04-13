@@ -1,6 +1,6 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
+import { sql } from '@vercel/postgres';
+import { drizzle } from 'drizzle-orm/vercel-postgres';
 
-const db = drizzle(process.env.DB_FILE_NAME!);
+const db = drizzle({ client: sql })
 
 export default db
