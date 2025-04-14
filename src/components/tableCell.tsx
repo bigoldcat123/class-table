@@ -25,16 +25,28 @@ export default function TableCell({ clx, className, coordinate }: Props) {
             await markAsFinishedAction({ clazz: clx!, coordinate })
         }
     }
+
     return (
         <>
-            <div draggable={!!clx} onDragStart={(e) => {
-                e.dataTransfer.setData("coordinate", JSON.stringify(coordinate))
-            }} onDragOver={(e) => e.preventDefault()} onDrop={(e) => {
-                e.preventDefault()
-                const from = JSON.parse(e.dataTransfer.getData("coordinate"))
-                console.log("move " + JSON.stringify(from) + " to " + JSON.stringify(coordinate));
-
-            }}
+            <div draggable={clx && !clx.isFinished && !clx.isTemp}
+                onDragStart={(e) => {
+                    e.dataTransfer.setData("coordinate", JSON.stringify({ ...coordinate, ...clx }))
+                }}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                    e.preventDefault()
+                    if(clx?.isFinished || clx?.isTemp) {
+                        alert("不可以这么换哦！")
+                        return
+                    }
+                    const from = JSON.parse(e.dataTransfer.getData("coordinate"))
+                    console.log("move " + JSON.stringify(from) + " to " + JSON.stringify(coordinate));
+                    if (clx) {
+                        console.log("switch");
+                    } else {
+                        console.log("change");
+                    }
+                }}
                 onClick={() => markAsFinished()}
                 className={clsx(" cursor-pointer min-w-[9vw] max-w-[9vw] px-2 h-[5vw] border-2 flex flex-col items-center justify-center", className, {
                     'border-amber-500': clx?.isTemp,
