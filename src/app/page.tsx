@@ -3,6 +3,7 @@ import ClassTable from "@/components/classTable";
 import Link from "next/link";
 // import '@libsql/darwin-arm64'
 
+
 type Props = {
   searchParams: Promise<{
     next: string

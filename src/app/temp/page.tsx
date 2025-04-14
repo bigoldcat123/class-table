@@ -4,6 +4,9 @@ import BackButton from "@/components/backButton";
 import TempAddForm from "@/components/tempAddForm";
 import TempTable from "@/components/tempTable";
 
+
+export const dynamic = 'force-dynamic'
+
 type Props = {
 
 }
