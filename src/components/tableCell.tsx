@@ -35,7 +35,7 @@ export default function TableCell({ clx, className, coordinate }: Props) {
   return (
     <>
       <div
-        draggable={clx && !clx.isFinished && !clx.isTemp}
+        draggable={clx && !clx.isFinished}
         onDragStart={(e) => {
           e.dataTransfer.setData(
             "coordinate",
@@ -45,7 +45,7 @@ export default function TableCell({ clx, className, coordinate }: Props) {
         onDragOver={(e) => e.preventDefault()}
         onDrop={(e) => {
           e.preventDefault();
-          if (clx?.isFinished || clx?.isTemp) {
+          if (clx?.isFinished) {
             alert("不可以这么换哦！");
             return;
           }
@@ -56,12 +56,14 @@ export default function TableCell({ clx, className, coordinate }: Props) {
             coordinate,
             tableCell: clx,
           };
-          swicthAction(from, to);
-          if (clx) {
-            console.log("switch");
-          } else {
-            console.log("change");
+          if (
+            from.coordinate.week == to.coordinate.week &&
+            from.coordinate.order == to.coordinate.order
+          ) {
+            alert("不可以这么换哦！");
+            return;
           }
+          swicthAction(from, to);
         }}
         onClick={() => markAsFinished()}
         className={clsx(

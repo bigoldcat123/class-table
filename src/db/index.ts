@@ -1,6 +1,11 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/libsql';
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/libsql";
+const dbFile =
+  process.env.NODE_ENV == "development"
+    ? process.env.DB_FILE_NAME_TEST!
+    : process.env.DB_FILE_NAME!;
+const db = drizzle(dbFile);
 
-const db = drizzle(process.env.DB_FILE_NAME!);
+console.log(dbFile);
 
-export default db
+export default db;
